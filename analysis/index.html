@@ -1,0 +1,119 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Elon Musk — Analysis</title><style>
+:root{--bg:#000;--fg:#e7e9ea;--mut:#71767b;--bd:#2f3336;--blue:#1d9bf0;--card:#16181c}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
+main{max-width:980px;margin:auto;border-left:1px solid var(--bd);border-right:1px solid var(--bd);min-height:100vh}
+.top{position:sticky;top:0;z-index:10;background:rgba(0,0,0,.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--bd)}
+.th{display:flex;align-items:center;gap:16px;padding:8px 16px}.th b{font-size:20px;font-weight:800}.th small{color:var(--mut)}
+.nav{display:flex;overflow-x:auto;scrollbar-width:none}.nav a{flex:none;padding:14px 16px;color:var(--mut);font-weight:600;white-space:nowrap;position:relative}
+.nav a.on{color:var(--fg)}.nav a.on:after{content:"";position:absolute;left:16px;right:16px;bottom:0;height:4px;border-radius:2px;background:var(--blue)}
+section{padding:16px;border-bottom:1px solid var(--bd)}h2{font-size:22px;font-weight:800;margin:4px 0 8px}h3{font-size:16px;margin:18px 0 8px}
+.mut{color:var(--mut)}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}.card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:14px;overflow-x:auto}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.kpi{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:10px}.kpi b{display:block;font-size:22px}
+svg text{fill:var(--mut);font-size:10px}.lg{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:12px;color:var(--mut);margin-top:6px}.lg i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:-1px}
+.bars div{display:flex;align-items:center;gap:8px;margin:3px 0;font-size:13px}.bars span.l{width:150px;flex:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.bars span.b{height:14px;background:var(--blue);border-radius:3px}
+.note{background:#0b2a40;border:1px solid #1d9bf055;border-radius:12px;padding:10px 12px;margin:10px 0}.warn{background:#2a1f05;border-color:#f5a62355}
+.rep{border:1px solid var(--bd);border-radius:14px;padding:12px;margin:10px 0}.rep h4{margin:0 0 6px;font-size:16px}.rep ul{margin:6px 0 0;padding-left:18px}.rep li{margin:3px 0;font-size:13px}
+table{border-collapse:collapse;width:100%;font-size:13px}td,th{border-bottom:1px solid var(--bd);padding:6px;text-align:left;vertical-align:top}th{color:var(--mut);font-weight:600}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}.filters input,.filters select{background:#202327;border:1px solid var(--bd);color:var(--fg);border-radius:99px;padding:8px 12px;font:inherit}
+.tw{border-bottom:1px solid var(--bd);padding:10px 2px}.tw .m{font-size:12px;color:var(--mut)}.tag{display:inline-block;font-size:11px;padding:1px 7px;border-radius:99px;background:#202327;margin-right:4px;color:var(--fg)}
+.ctx{font-size:12px;color:var(--mut);border-left:2px solid var(--bd);padding-left:8px;margin-top:4px}
+#tip{position:fixed;pointer-events:none;background:#000;border:1px solid var(--bd);border-radius:8px;padding:4px 8px;font-size:12px;display:none;z-index:50}
+@media(max-width:700px){main{border:0}.grid2{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}.bars span.l{width:110px}section{padding:12px}}
+</style></head><body><div id="tip"></div><main>
+<div class="top"><div class="th"><a href="../" style="font-size:20px;color:var(--fg)">←</a><div><b>Analysis</b><br><small id="basis">loading…</small></div></div>
+<nav class="nav"><a href="#activity" class="on">Activity</a><a href="#topics">Topics</a><a href="#people">People</a><a href="#language">Language</a><a href="#thinking">Thinking</a><a href="#explore">Explorer</a></nav></div>
+<section id="activity"><h2>Activity</h2><div class="kpis" id="kpis"></div>
+<h3>Posts per day (calendar)</h3><div class="card" id="cal"></div>
+<h3>Hour of day × weekday (IST)</h3><div class="card" id="hw"></div>
+<div class="grid2"><div><h3>Volume over time</h3><div class="card" id="vol"></div></div><div><h3>Mix of item types per day</h3><div class="card" id="mix"></div></div></div>
+<div class="note" id="burst"></div></section>
+<section id="topics"><h2>Topics</h2><p class="mut">Rule-based keyword classification (no LLM pass: no model API on the build box). A short reply like “True” inherits the topic of the post it answers. Items can have several topics.</p>
+<div class="grid2"><div><h3>Topic share</h3><div class="card bars" id="ttot"></div></div><div><h3>Topic share over time (stacked)</h3><div class="card" id="tarea"></div></div></div>
+<h3>Topic × hour of day (IST)</h3><div class="card" id="thm"></div></section>
+<section id="people"><h2>People</h2><div class="grid2"><div><h3>Most replied to</h3><div class="card bars" id="prep"></div></div><div><h3>Most quoted</h3><div class="card bars" id="pquo"></div></div></div>
+<h3>Interaction network (top 40 accounts, colour = dominant topic, size = interactions)</h3><div class="card" id="net"></div>
+<h3>What he engages each account about</h3><div class="card"><table id="ptab"></table></div></section>
+<section id="language"><h2>Language & style</h2><div class="kpis" id="lk"></div>
+<div class="grid2"><div><h3>Post length (characters, own words only)</h3><div class="card" id="lenh"></div></div><div><h3>Signature phrases (items containing)</h3><div class="card bars" id="sig"></div></div></div>
+<div class="grid2"><div><h3>Most-used words</h3><div class="card bars" id="words"></div></div><div><h3>Most-used phrases</h3><div class="card bars" id="bigr"></div></div></div>
+<div class="grid2"><div><h3>Emoji</h3><div class="card bars" id="emo"></div></div><div><h3>Tone & certainty per day</h3><div class="card" id="tone"></div></div></div></section>
+<section id="thinking"><h2>Thinking patterns (technical)</h2>
+<div class="note warn"><b>Interpretation, not psychological fact.</b> This is one reader's evidence-based reading of public posts, written <span id="wr"></span> from <span id="smp"></span>. Two weeks is a small, event-heavy window (product launches, a documentary, an Indian Starlink dispute, a Texas Senate race), so patterns may not generalise. Engagement is shaped by the platform, by staff or automation, and by self-promotion. The written report is not regenerated automatically; the numbers on this page are.</div>
+<div id="report"></div><h3>Predictions & forward-looking claims tracker</h3><div class="card"><table id="preds"></table></div></section>
+<section id="explore"><h2>Explorer</h2><div class="filters"><input id="fq" placeholder="Keyword…"><select id="ft"><option value="">All topics</option></select><select id="fy"><option value="">All types</option><option>post</option><option>reply</option><option>quote</option><option>repost</option></select><input type="date" id="fa"><input type="date" id="fb"></div>
+<div class="mut" id="fc"></div><div id="list"></div><button id="fm" style="margin:10px 0;background:#202327;color:var(--fg);border:1px solid var(--bd);border-radius:99px;padding:8px 16px;display:none">Show more</button></section>
+</main>
+<script>
+(function(){
+var COL={'SpaceX/space':'#1d9bf0','Tesla/EVs/autonomy':'#f4212e','AI/xAI/Grok':'#7856ff','X platform':'#e7e9ea','Politics/government':'#ff7a00','Free speech/media':'#ffd400','Demographics/birth rates':'#f91880','Economics/business':'#00ba7c','Engineering/physics':'#00d1d1','Memes/humour':'#a3e635','Culture/crime/gender':'#b45309','Games/culture':'#8b98a5','Other':'#3a3f44',center:'#fff'};
+var TY={post:'#1d9bf0',reply:'#00ba7c',quote:'#7856ff',repost:'#536471'};
+var tip=document.getElementById('tip');
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]});}
+function svg(w,h,inner){return '<svg viewBox="0 0 '+w+' '+h+'" width="100%" style="max-width:'+w+'px;display:block">'+inner+'</svg>';}
+function t(x,y,s,a){return '<text x="'+x+'" y="'+y+'"'+(a?' text-anchor="'+a+'"':'')+'>'+esc(s)+'</text>';}
+function heat(v,max){if(!v)return '#16181c';var k=Math.sqrt(v/max);return 'rgba(29,155,240,'+(0.15+0.85*k).toFixed(2)+')';}
+function hov(el){el.addEventListener('mousemove',function(e){var g=e.target.getAttribute('data-t');if(!g){tip.style.display='none';return;}tip.textContent=g;tip.style.display='block';tip.style.left=(e.clientX+12)+'px';tip.style.top=(e.clientY+12)+'px';});el.addEventListener('mouseleave',function(){tip.style.display='none'});}
+function bars(id,rows,fmt){var m=Math.max.apply(null,rows.map(function(r){return r[1]}).concat([1]));document.getElementById(id).innerHTML=rows.map(function(r){return '<div><span class="l" title="'+esc(r[0])+'">'+(fmt?fmt(r):esc(r[0]))+'</span><span class="b" style="width:'+(r[1]/m*60).toFixed(1)+'%;background:'+(r[2]||'var(--blue)')+'"></span><span class="mut">'+r[1]+'</span></div>'}).join('');}
+function stacked(id,keys,series,labels,cols,area){var n=labels.length,W=460,H=200,L=28,B=22,tot=labels.map(function(_,i){return keys.reduce(function(s,k){return s+series[k][i]},0)}),mx=Math.max.apply(null,tot.concat([1])),bw=(W-L)/n,o='';
+ for(var g=0;g<=4;g++){var y=H-B-(H-B-6)*g/4;o+='<line x1="'+L+'" x2="'+W+'" y1="'+y+'" y2="'+y+'" stroke="#2f3336"/>'+t(L-4,y+3,Math.round(mx*g/4),'end');}
+ if(area){var base=labels.map(function(){return 0});keys.forEach(function(k){var top=base.map(function(b,i){return b+series[k][i]});var pts=top.map(function(v,i){return (L+bw*i+bw/2)+','+(H-B-(H-B-6)*v/mx)}).concat(base.map(function(v,i){return (L+bw*i+bw/2)+','+(H-B-(H-B-6)*v/mx)}).reverse());o+='<polygon points="'+pts.join(' ')+'" fill="'+cols[k]+'" opacity=".85"><title>'+esc(k)+'</title></polygon>';base=top;});}
+ else labels.forEach(function(lb,i){var y=H-B;keys.forEach(function(k){var v=series[k][i],h=(H-B-6)*v/mx;if(v)o+='<rect x="'+(L+bw*i+1)+'" y="'+(y-h)+'" width="'+Math.max(1,bw-2)+'" height="'+h+'" fill="'+cols[k]+'" data-t="'+esc(lb+' · '+k+': '+v)+'"/>';y-=h;});});
+ var step=Math.ceil(n/7);labels.forEach(function(lb,i){if(i%step==0)o+=t(L+bw*i+bw/2,H-6,lb.slice(5),'middle');});
+ var el=document.getElementById(id);el.innerHTML=svg(W,H,o)+'<div class="lg">'+keys.map(function(k){return '<span><i style="background:'+cols[k]+'"></i>'+esc(k)+'</span>'}).join('')+'</div>';hov(el);}
+fetch('data.json').then(function(r){return r.json()}).then(function(D){
+ document.getElementById('basis').textContent='Based on '+D.N+' items ('+D.own+' original posts, replies and quotes) from '+D.d0+' to '+D.d1+' · rebuilt '+D.built;
+ var ty=D.types;document.getElementById('kpis').innerHTML=[['Items',D.N],['Per day',(D.N/D.cal.length).toFixed(0)],['Replies',ty.reply||0],['Quotes',ty.quote||0],['Reposts',ty.repost||0],['Posts',ty.post||0],['00–06 IST',Math.round(D.late/D.N*100)+'%'],['Peak hour IST',D.peakhour+':00']].map(function(k){return '<div class="kpi"><span class="mut">'+k[0]+'</span><b>'+k[1]+'</b></div>'}).join('');
+ // calendar: weeks columns
+ var c=D.calendar,mx=Math.max.apply(null,c.map(function(x){return x[1]})),first=new Date(c[0][0]+'T00:00:00'),off=(first.getDay()+6)%7,cs=16,o='',WD=['Mon','','Wed','','Fri','','Sun'];
+ WD.forEach(function(w,i){o+=t(0,24+i*cs+11,w)});c.forEach(function(x,i){var k=i+off,col=Math.floor(k/7),row=k%7;o+='<rect x="'+(30+col*cs)+'" y="'+(24+row*cs)+'" width="'+(cs-3)+'" height="'+(cs-3)+'" rx="3" fill="'+heat(x[1],mx)+'" data-t="'+x[0]+': '+x[1]+' items"/>';if(row==0||i==0)o+=t(30+col*cs,16,x[0].slice(5));});
+ var cw=30+(Math.floor((c.length+off)/7)+1)*cs+40;document.getElementById('cal').innerHTML=svg(Math.max(cw,200),24+7*cs+8,o)+'<div class="lg">Less <i style="background:#16181c"></i><i style="background:rgba(29,155,240,.3)"></i><i style="background:rgba(29,155,240,.6)"></i><i style="background:rgba(29,155,240,1)"></i> More · max '+mx+'/day</div>';hov(document.getElementById('cal'));
+ // hour x weekday
+ var hw=D.hw,m2=Math.max.apply(null,hw.map(function(r){return Math.max.apply(null,r)})),W=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],o2='';
+ hw.forEach(function(r,d){o2+=t(0,18+d*20+13,W[d]);r.forEach(function(v,h){o2+='<rect x="'+(32+h*24)+'" y="'+(18+d*20)+'" width="22" height="18" rx="3" fill="'+heat(v,m2)+'" data-t="'+W[d]+' '+h+':00 IST — '+v+'"/>'});});
+ for(var h=0;h<24;h+=3)o2+=t(32+h*24+11,12,h,'middle');document.getElementById('hw').innerHTML=svg(32+24*24,18+7*20+4,o2);hov(document.getElementById('hw'));
+ var tot={};tot.items=D.cal.map(function(d,i){return ['post','reply','quote','repost'].reduce(function(s,k){return s+D.mix[k][i]},0)});
+ stacked('vol',['items'],tot,D.cal,{items:'#1d9bf0'},true);stacked('mix',['post','reply','quote','repost'],D.mix,D.cal,TY,false);
+ document.getElementById('burst').innerHTML='<b>Bursts & late nights:</b> busiest 60-minute window had <b>'+D.burst[0]+'</b> items (starting '+esc(D.burst[1])+'). <b>'+Math.round(D.late/D.N*100)+'%</b> of items were posted between midnight and 6 AM IST (≈ US afternoon/evening). Longest silence: <b>'+D.longest+' h</b>.';
+ // topics
+ var tt=D.TN.map(function(n){return [n,D.topic_tot[n]||0,COL[n]]}).sort(function(a,b){return b[1]-a[1]});bars('ttot',tt);
+ var keys=tt.map(function(x){return x[0]});stacked('tarea',keys,D.tshare,D.cal,COL,true);
+ var o3='',m3=0;keys.forEach(function(k){m3=Math.max(m3,Math.max.apply(null,D.th[k]))});keys.forEach(function(k,i){o3+=t(0,18+i*18+12,k.length>20?k.slice(0,19)+'…':k);D.th[k].forEach(function(v,h){o3+='<rect x="'+(130+h*20)+'" y="'+(18+i*18)+'" width="18" height="16" rx="2" fill="'+heat(v,m3)+'" data-t="'+esc(k)+' @ '+h+':00 IST — '+v+'"/>'})});
+ for(var h2=0;h2<24;h2+=3)o3+=t(130+h2*20+9,12,h2,'middle');document.getElementById('thm').innerHTML=svg(130+24*20,18+keys.length*18+4,o3);hov(document.getElementById('thm'));
+ // people
+ var pp=D.people;bars('prep',pp.filter(function(p){return p.r}).sort(function(a,b){return b.r-a.r}).slice(0,12).map(function(p){return ['@'+p.u,p.r,'#00ba7c']}),function(r){return '<a href="https://x.com/'+r[0].slice(1)+'" target="_blank" rel="noopener">'+esc(r[0])+'</a>'});
+ bars('pquo',pp.filter(function(p){return p.q}).sort(function(a,b){return b.q-a.q}).slice(0,12).map(function(p){return ['@'+p.u,p.q,'#7856ff']}),function(r){return '<a href="https://x.com/'+r[0].slice(1)+'" target="_blank" rel="noopener">'+esc(r[0])+'</a>'});
+ var NW=600,NH=440,sx=function(x){return NW/2+x*NW*0.42},sy=function(y){return NH/2+y*NH*0.42},o4='',mxn=Math.max.apply(null,D.nodes.slice(1).map(function(n){return n.n}));
+ D.nodes.slice(1).forEach(function(n){o4+='<line x1="'+sx(0)+'" y1="'+sy(0)+'" x2="'+sx(n.x)+'" y2="'+sy(n.y)+'" stroke="#2f3336" stroke-width="'+(0.5+3*n.n/mxn).toFixed(1)+'"/>'});
+ D.nodes.forEach(function(n,i){var r=i?4+10*Math.sqrt(n.n/mxn):14;o4+='<a href="https://x.com/'+n.id+'" target="_blank" rel="noopener"><circle cx="'+sx(n.x)+'" cy="'+sy(n.y)+'" r="'+r.toFixed(1)+'" fill="'+COL[n.topic]+'" stroke="#000" data-t="@'+n.id+(i?' — '+n.n+' (replies '+n.r+', quotes '+n.q+', reposts '+n.rt+') · '+n.topic:'')+'"/></a>';if(i==0||n.n>=mxn*0.25)o4+=t(sx(n.x),sy(n.y)-r-3,'@'+n.id,'middle');});
+ var ne=document.getElementById('net');ne.innerHTML=svg(NW,NH,o4)+'<div class="lg">'+keys.map(function(k){return '<span><i style="background:'+COL[k]+'"></i>'+esc(k)+'</span>'}).join('')+'</div>';hov(ne);
+ document.getElementById('ptab').innerHTML='<tr><th>Account</th><th>Replies</th><th>Quotes</th><th>Reposts</th><th>Top topics</th></tr>'+pp.slice(0,25).map(function(p){return '<tr><td><a href="https://x.com/'+p.u+'" target="_blank" rel="noopener">@'+esc(p.u)+'</a></td><td>'+p.r+'</td><td>'+p.q+'</td><td>'+p.rt+'</td><td>'+p.topics.map(function(x){return '<span class="tag" style="border-left:3px solid '+COL[x]+'">'+esc(x)+'</span>'}).join('')+'</td></tr>'}).join('');
+ // language
+ document.getElementById('lk').innerHTML=[['Median length',D.medlen+' chars'],['≤2-word replies/quotes',Math.round(D.oneword/D.own*100)+'%'],['Contain a question',Math.round(D.questions/D.own*100)+'%'],['Boosters vs hedges',D.boost+' : '+D.hedge]].map(function(k){return '<div class="kpi"><span class="mut">'+k[0]+'</span><b>'+k[1]+'</b></div>'}).join('');
+ var lw=420,lhh=170,lm=Math.max.apply(null,D.lenhist),bw2=(lw-30)/D.lenhist.length,o5='';D.lenhist.forEach(function(v,i){var h=(lhh-34)*v/lm;o5+='<rect x="'+(30+i*bw2+2)+'" y="'+(lhh-22-h)+'" width="'+(bw2-4)+'" height="'+h+'" fill="#1d9bf0" data-t="'+D.lenbins[i]+' chars: '+v+'"/>'+t(30+i*bw2+bw2/2,lhh-8,D.lenbins[i],'middle')+t(30+i*bw2+bw2/2,lhh-26-h,v,'middle')});
+ document.getElementById('lenh').innerHTML=svg(lw,lhh,o5);hov(document.getElementById('lenh'));
+ bars('sig',D.sig.slice(0,16));bars('words',D.words.slice(0,20));bars('bigr',D.bigrams.slice(0,20));bars('emo',D.emoji.slice(0,15));
+ var tw=460,thh=180,o6='',n=D.cal.length,bx=(tw-30)/n;o6+='<line x1="30" x2="'+tw+'" y1="70" y2="70" stroke="#2f3336"/>'+t(26,20,'+','end')+t(26,124,'−','end');
+ var pts=D.sent_day.map(function(v,i){return (30+bx*i+bx/2)+','+(70-v*40)});o6+='<polyline points="'+pts.join(' ')+'" fill="none" stroke="#00ba7c" stroke-width="2"/>';
+ var cm=Math.max.apply(null,D.cert_day.map(function(x){return Math.max(x[0],x[1])}).concat([1]));D.cert_day.forEach(function(x,i){o6+='<rect x="'+(30+bx*i+1)+'" y="'+(170-40*x[0]/cm)+'" width="'+(bx/2-1)+'" height="'+(40*x[0]/cm)+'" fill="#f4212e" data-t="'+D.cal[i]+' boosters '+x[0]+'"/><rect x="'+(30+bx*i+bx/2)+'" y="'+(170-40*x[1]/cm)+'" width="'+(bx/2-1)+'" height="'+(40*x[1]/cm)+'" fill="#ffd400" data-t="'+D.cal[i]+' hedges '+x[1]+'"/>'});
+ document.getElementById('tone').innerHTML=svg(tw,thh,o6)+'<div class="lg"><span><i style="background:#00ba7c"></i>avg tone (lexicon, −3…+3)</span><span><i style="background:#f4212e"></i>certainty boosters</span><span><i style="background:#ffd400"></i>hedges</span></div>';hov(document.getElementById('tone'));
+ // report
+ document.getElementById('wr').textContent=D.written;document.getElementById('smp').textContent=D.sample;
+ function lk(c){return '<a href="https://x.com/elonmusk/status/'+c.id+'" target="_blank" rel="noopener">'+esc(c.d)+'</a>';}
+ document.getElementById('report').innerHTML=D.report.map(function(s,i){return '<div class="rep"><h4>'+(i+1)+'. '+esc(s.title)+'</h4><div>'+esc(s.claim)+'</div><ul>'+s.cites.map(function(c){return '<li>'+lk(c)+' — “'+esc(c.text)+'”</li>'}).join('')+'</ul></div>'}).join('');
+ document.getElementById('preds').innerHTML='<tr><th>Date (IST)</th><th>Claim</th><th>Kind</th><th>Status</th></tr>'+D.preds.map(function(p){return '<tr><td>'+lk(p)+'</td><td>'+esc(p.what)+'<div class="ctx">“'+esc(p.text)+'”</div></td><td>'+esc(p.kind)+'</td><td class="mut">open</td></tr>'}).join('');
+ // explorer
+ var ft=document.getElementById('ft');D.TN.forEach(function(n){ft.insertAdjacentHTML('beforeend','<option>'+esc(n)+'</option>')});
+ var shown=60,res=[];function run(){var q=document.getElementById('fq').value.toLowerCase(),tp=ft.value,y=document.getElementById('fy').value,a=document.getElementById('fa').value,b=document.getElementById('fb').value;
+  res=D.explorer.filter(function(e){return (!tp||e.topics.indexOf(tp)>=0)&&(!y||e.type==y)&&(!a||e.ts.slice(0,10)>=a)&&(!b||e.ts.slice(0,10)<=b)&&(!q||(e.text+' '+e.ctx+' '+(e.p||'')).toLowerCase().indexOf(q)>=0)});
+  document.getElementById('fc').textContent=res.length+' matching items';draw();}
+ function draw(){document.getElementById('list').innerHTML=res.slice(0,shown).map(function(e){return '<div class="tw"><div class="m"><a href="https://x.com/elonmusk/status/'+e.id+'" target="_blank" rel="noopener">'+esc(e.ts.replace('T',' '))+' IST</a> · '+e.type+(e.p?' · @'+esc(e.p):'')+' '+e.topics.map(function(x){return '<span class="tag" style="border-left:3px solid '+COL[x]+'">'+esc(x)+'</span>'}).join('')+'</div><div>'+(e.type=='repost'?'<span class="mut">Repost of @'+esc(e.p||'?')+' (text hidden)</span>':esc(e.text))+'</div>'+(e.ctx&&e.type!='repost'?'<div class="ctx">'+esc(e.ctx)+'</div>':'')+'</div>'}).join('');document.getElementById('fm').style.display=res.length>shown?'inline-block':'none';}
+ ['fq','ft','fy','fa','fb'].forEach(function(i){document.getElementById(i).addEventListener('input',function(){shown=60;run()})});document.getElementById('fm').onclick=function(){shown+=60;draw()};
+ document.getElementById('fa').value=D.d0;document.getElementById('fb').value=D.d1;run();
+ document.body.setAttribute('data-ready','1');
+}).catch(function(e){document.getElementById('basis').textContent='Failed to load data: '+e.message;document.title='ERR '+e.message;});
+// nav highlight
+var links=document.querySelectorAll('.nav a');window.addEventListener('scroll',function(){var cur=links[0];links.forEach(function(a){var s=document.querySelector(a.getAttribute('href'));if(s&&s.getBoundingClientRect().top<140)cur=a});links.forEach(function(a){a.classList.toggle('on',a===cur)})},{passive:true});
+})();
+</script></body></html>
