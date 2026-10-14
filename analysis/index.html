@@ -14,17 +14,24 @@ section{padding:16px;border-bottom:1px solid var(--bd)}h2{font-size:22px;font-we
 svg text{fill:var(--mut);font-size:10px}.lg{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:12px;color:var(--mut);margin-top:6px}.lg i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:-1px}
 .bars div{display:flex;align-items:center;gap:8px;margin:3px 0;font-size:13px}.bars span.l{width:150px;flex:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.bars span.b{height:14px;background:var(--blue);border-radius:3px}
 .note{background:#0b2a40;border:1px solid #1d9bf055;border-radius:12px;padding:10px 12px;margin:10px 0}.warn{background:#2a1f05;border-color:#f5a62355}
-.rep{border:1px solid var(--bd);border-radius:14px;padding:12px;margin:10px 0}.rep h4{margin:0 0 6px;font-size:16px}.rep ul{margin:6px 0 0;padding-left:18px}.rep li{margin:3px 0;font-size:13px}
+.rep{border:1px solid var(--bd);border-radius:14px;padding:12px;margin:10px 0}.rep h4{margin:0 0 6px;font-size:17px}.rep .lbl{font-size:12px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.04em;margin-top:10px}.rep .ap{background:#0a1f12;border:1px solid #00ba7c44;border-radius:10px;padding:8px 10px;margin-top:4px}.tag.early{background:#3a2a05;color:#ffd400}.tag.strong{background:#05281a;color:#00ba7c}.rep ul{margin:6px 0 0;padding-left:18px}.rep li{margin:3px 0;font-size:13px}
 table{border-collapse:collapse;width:100%;font-size:13px}td,th{border-bottom:1px solid var(--bd);padding:6px;text-align:left;vertical-align:top}th{color:var(--mut);font-weight:600}
-.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}.filters input,.filters select{background:#202327;border:1px solid var(--bd);color:var(--fg);border-radius:99px;padding:8px 12px;font:inherit}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}.filters button{background:#202327;border:1px solid var(--bd);color:var(--fg);border-radius:99px;padding:8px 14px;font:inherit;cursor:pointer}.filters button.on{background:var(--fg);color:#000}.filters input,.filters select{background:#202327;border:1px solid var(--bd);color:var(--fg);border-radius:99px;padding:8px 12px;font:inherit}
 .tw{border-bottom:1px solid var(--bd);padding:10px 2px}.tw .m{font-size:12px;color:var(--mut)}.tag{display:inline-block;font-size:11px;padding:1px 7px;border-radius:99px;background:#202327;margin-right:4px;color:var(--fg)}
 .ctx{font-size:12px;color:var(--mut);border-left:2px solid var(--bd);padding-left:8px;margin-top:4px}
 #tip{position:fixed;pointer-events:none;background:#000;border:1px solid var(--bd);border-radius:8px;padding:4px 8px;font-size:12px;display:none;z-index:50}
 @media(max-width:700px){main{border:0}.grid2{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}.bars span.l{width:110px}section{padding:12px}}
 </style></head><body><div id="tip"></div><main>
 <div class="top"><div class="th"><a href="../" style="font-size:20px;color:var(--fg)">←</a><div><b>Analysis</b><br><small id="basis">loading…</small></div></div>
-<nav class="nav"><a href="#activity" class="on">Activity</a><a href="#topics">Topics</a><a href="#people">People</a><a href="#language">Language</a><a href="#thinking">Thinking</a><a href="#explore">Explorer</a></nav></div>
-<section id="activity"><h2>Activity</h2><div class="kpis" id="kpis"></div>
+<nav class="nav"><a href="#eng" class="on">Engineering</a><a href="#biz">Business</a><a href="#life">Life</a><a href="#preds-s">Predictions</a><a href="#explore">Explorer</a><a href="#activity">Charts</a></nav></div>
+<section id="lessons-intro"><h2>Engineering, business & life lessons from Elon's posts</h2>
+<div class="note warn"><b>Interpretation, not psychological fact.</b> Lessons distilled by one reader from public posts, written <span id="wr"></span> from <span id="smp"></span>. Each lesson quotes the tweets it rests on; lessons with thin evidence are marked <span class="tag early">early signal</span>. A two-week, event-heavy window is a small sample, and posts are shaped by promotion and platform dynamics. <span id="notsup"></span></div></section>
+<section id="eng"><h2>🛠️ Engineering lessons</h2><div id="L-Engineering"></div></section>
+<section id="biz"><h2>📈 Business lessons</h2><div id="L-Business"></div></section>
+<section id="life"><h2>🌱 Life lessons</h2><div id="L-Life"></div></section>
+<section id="preds-s"><h2>Predictions & forward-looking claims</h2><div class="card"><table id="preds"></table></div></section>
+<section id="explore"><h2>Explorer</h2><div class="filters" id="chips"><button data-c="Engineering">🛠️ engineering</button><button data-c="Business">📈 business</button><button data-c="Life lessons">🌱 life lessons</button><button data-c="">all</button></div><div class="filters"><input id="fq" placeholder="Keyword…"><select id="ft"><option value="">All topics</option></select><select id="fy"><option value="">All types</option><option>post</option><option>reply</option><option>quote</option><option>repost</option></select><input type="date" id="fa"><input type="date" id="fb"></div>
+<div class="mut" id="fc"></div><div id="list"></div><button id="fm" style="margin:10px 0;background:#202327;color:var(--fg);border:1px solid var(--bd);border-radius:99px;padding:8px 16px;display:none">Show more</button></section><section><h2 style="font-size:18px" class="mut">Secondary: activity, topics, people and style charts</h2><p class="mut">Politics, culture-war and meme content appears here in the topic charts rather than in the lessons.</p></section><section id="activity"><h2>Activity</h2><div class="kpis" id="kpis"></div>
 <h3>Posts per day (calendar)</h3><div class="card" id="cal"></div>
 <h3>Hour of day × weekday (IST)</h3><div class="card" id="hw"></div>
 <div class="grid2"><div><h3>Volume over time</h3><div class="card" id="vol"></div></div><div><h3>Mix of item types per day</h3><div class="card" id="mix"></div></div></div>
@@ -39,15 +46,12 @@ table{border-collapse:collapse;width:100%;font-size:13px}td,th{border-bottom:1px
 <div class="grid2"><div><h3>Post length (characters, own words only)</h3><div class="card" id="lenh"></div></div><div><h3>Signature phrases (items containing)</h3><div class="card bars" id="sig"></div></div></div>
 <div class="grid2"><div><h3>Most-used words</h3><div class="card bars" id="words"></div></div><div><h3>Most-used phrases</h3><div class="card bars" id="bigr"></div></div></div>
 <div class="grid2"><div><h3>Emoji</h3><div class="card bars" id="emo"></div></div><div><h3>Tone & certainty per day</h3><div class="card" id="tone"></div></div></div></section>
-<section id="thinking"><h2>Thinking patterns (technical)</h2>
-<div class="note warn"><b>Interpretation, not psychological fact.</b> This is one reader's evidence-based reading of public posts, written <span id="wr"></span> from <span id="smp"></span>. Two weeks is a small, event-heavy window (product launches, a documentary, an Indian Starlink dispute, a Texas Senate race), so patterns may not generalise. Engagement is shaped by the platform, by staff or automation, and by self-promotion. The written report is not regenerated automatically; the numbers on this page are.</div>
-<div id="report"></div><h3>Predictions & forward-looking claims tracker</h3><div class="card"><table id="preds"></table></div></section>
-<section id="explore"><h2>Explorer</h2><div class="filters"><input id="fq" placeholder="Keyword…"><select id="ft"><option value="">All topics</option></select><select id="fy"><option value="">All types</option><option>post</option><option>reply</option><option>quote</option><option>repost</option></select><input type="date" id="fa"><input type="date" id="fb"></div>
-<div class="mut" id="fc"></div><div id="list"></div><button id="fm" style="margin:10px 0;background:#202327;color:var(--fg);border:1px solid var(--bd);border-radius:99px;padding:8px 16px;display:none">Show more</button></section>
+
+
 </main>
 <script>
 (function(){
-var COL={'SpaceX/space':'#1d9bf0','Tesla/EVs/autonomy':'#f4212e','AI/xAI/Grok':'#7856ff','X platform':'#e7e9ea','Politics/government':'#ff7a00','Free speech/media':'#ffd400','Demographics/birth rates':'#f91880','Economics/business':'#00ba7c','Engineering/physics':'#00d1d1','Memes/humour':'#a3e635','Culture/crime/gender':'#b45309','Games/culture':'#8b98a5','Other':'#3a3f44',center:'#fff'};
+var COL={'SpaceX/space':'#1d9bf0','Tesla/EVs/autonomy':'#f4212e','AI/xAI/Grok':'#7856ff','X platform':'#e7e9ea','Politics/government':'#ff7a00','Free speech/media':'#ffd400','Demographics/birth rates':'#f91880','Business':'#00ba7c','Life lessons':'#f5a623','Engineering':'#00d1d1','Memes/humour':'#a3e635','Culture/crime/gender':'#b45309','Games/culture':'#8b98a5','Other':'#3a3f44',center:'#fff'};
 var TY={post:'#1d9bf0',reply:'#00ba7c',quote:'#7856ff',repost:'#536471'};
 var tip=document.getElementById('tip');
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]});}
@@ -101,7 +105,8 @@ fetch('data.json').then(function(r){return r.json()}).then(function(D){
  // report
  document.getElementById('wr').textContent=D.written;document.getElementById('smp').textContent=D.sample;
  function lk(c){return '<a href="https://x.com/elonmusk/status/'+c.id+'" target="_blank" rel="noopener">'+esc(c.d)+'</a>';}
- document.getElementById('report').innerHTML=D.report.map(function(s,i){return '<div class="rep"><h4>'+(i+1)+'. '+esc(s.title)+'</h4><div>'+esc(s.claim)+'</div><ul>'+s.cites.map(function(c){return '<li>'+lk(c)+' — “'+esc(c.text)+'”</li>'}).join('')+'</ul></div>'}).join('');
+ document.getElementById('notsup').textContent=D.notsup||'';
+ Object.keys(D.report).forEach(function(sec){var el=document.getElementById('L-'+sec);if(!el)return;el.innerHTML=D.report[sec].map(function(s,i){return '<div class="rep"><h4>'+(i+1)+'. '+esc(s.title)+' <span class="tag '+s.level+'">'+(s.level=='early'?'early signal':'well supported')+'</span></h4><div>'+esc(s.claim)+'</div><div class="lbl">What he said</div><ul>'+s.cites.map(function(c){return '<li>'+lk(c)+' — “'+esc(c.text.length>150?c.text.slice(0,150)+'…':c.text)+'”</li>'}).join('')+'</ul><div class="lbl">How to apply it</div><div class="ap">'+esc(s.apply)+'</div></div>'}).join('');});
  document.getElementById('preds').innerHTML='<tr><th>Date (IST)</th><th>Claim</th><th>Kind</th><th>Status</th></tr>'+D.preds.map(function(p){return '<tr><td>'+lk(p)+'</td><td>'+esc(p.what)+'<div class="ctx">“'+esc(p.text)+'”</div></td><td>'+esc(p.kind)+'</td><td class="mut">open</td></tr>'}).join('');
  // explorer
  var ft=document.getElementById('ft');D.TN.forEach(function(n){ft.insertAdjacentHTML('beforeend','<option>'+esc(n)+'</option>')});
@@ -110,6 +115,7 @@ fetch('data.json').then(function(r){return r.json()}).then(function(D){
   document.getElementById('fc').textContent=res.length+' matching items';draw();}
  function draw(){document.getElementById('list').innerHTML=res.slice(0,shown).map(function(e){return '<div class="tw"><div class="m"><a href="https://x.com/elonmusk/status/'+e.id+'" target="_blank" rel="noopener">'+esc(e.ts.replace('T',' '))+' IST</a> · '+e.type+(e.p?' · @'+esc(e.p):'')+' '+e.topics.map(function(x){return '<span class="tag" style="border-left:3px solid '+COL[x]+'">'+esc(x)+'</span>'}).join('')+'</div><div>'+(e.type=='repost'?'<span class="mut">Repost of @'+esc(e.p||'?')+' (text hidden)</span>':esc(e.text))+'</div>'+(e.ctx&&e.type!='repost'?'<div class="ctx">'+esc(e.ctx)+'</div>':'')+'</div>'}).join('');document.getElementById('fm').style.display=res.length>shown?'inline-block':'none';}
  ['fq','ft','fy','fa','fb'].forEach(function(i){document.getElementById(i).addEventListener('input',function(){shown=60;run()})});document.getElementById('fm').onclick=function(){shown+=60;draw()};
+ document.querySelectorAll('#chips button').forEach(function(b){b.onclick=function(){ft.value=b.dataset.c;document.querySelectorAll('#chips button').forEach(function(x){x.classList.toggle('on',x===b)});shown=60;run();}});
  document.getElementById('fa').value=D.d0;document.getElementById('fb').value=D.d1;run();
  document.body.setAttribute('data-ready','1');
 }).catch(function(e){document.getElementById('basis').textContent='Failed to load data: '+e.message;document.title='ERR '+e.message;});
